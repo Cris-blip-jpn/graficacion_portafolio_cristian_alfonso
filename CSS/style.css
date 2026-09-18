@@ -1,62 +1,272 @@
-/* css/styles.css */
+/* ================================
+   VARIABLES
+================================ */
 :root {
-    --bg-color: #f4f6f9;
-    --text-color: #333;
-    --primary-color: #1a5276;
+    --bg-color: #f1f5f3;
+    --text-color: #26332d;
+    --text-secondary: #65736c;
+
+    --primary-color: #236b50;
+    --primary-dark: #174936;
+    --primary-light: #3d8b6b;
+
     --card-bg: #ffffff;
+
+    --shadow: 0 8px 25px rgba(27, 63, 49, 0.08);
+    --shadow-hover: 0 15px 35px rgba(27, 63, 49, 0.16);
+}
+
+/* ================================
+   RESET
+================================ */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
+/* ================================
+   HEADER
+================================ */
 header {
-    background-color: var(--primary-color);
+    background: linear-gradient(
+        135deg,
+        var(--primary-dark),
+        var(--primary-color),
+        var(--primary-light)
+    );
+
     color: white;
-    padding: 2rem;
+    padding: 3rem 1.5rem;
+
     text-align: center;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
+header h1 {
+    margin: 0 0 0.8rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+header p {
+    margin: 0.35rem 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* ================================
+   CONTENIDO PRINCIPAL
+================================ */
 main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
 }
 
+/* ================================
+   SECCIONES
+================================ */
 .unidad-seccion {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
+.unidad-seccion h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--primary-dark);
+
+    position: relative;
+    padding-left: 1rem;
+}
+
+/* Línea decorativa */
+.unidad-seccion h2::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 4px;
+
+    width: 5px;
+    height: 80%;
+
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+/* ================================
+   GRID DE ACTIVIDADES
+================================ */
 .grid-actividades {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+
     gap: 1.5rem;
+
     margin-top: 1rem;
 }
 
+/* ================================
+   TARJETAS
+================================ */
 .tarjeta-actividad {
     background: var(--card-bg);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+    border-radius: 14px;
+
+    padding: 1.6rem;
+
+    box-shadow: var(--shadow);
+
+    border: 1px solid rgba(35, 107, 80, 0.08);
+
     border-top: 4px solid var(--primary-color);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    position: relative;
+
+    overflow: hidden;
 }
 
+/* Efecto al pasar el mouse */
+.tarjeta-actividad:hover {
+    transform: translateY(-7px);
+
+    box-shadow: var(--shadow-hover);
+
+    border-top-color: var(--primary-light);
+}
+
+/* Brillo decorativo */
+.tarjeta-actividad::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    background: rgba(61, 139, 107, 0.06);
+
+    border-radius: 50%;
+
+    right: -40px;
+    bottom: -40px;
+}
+
+/* ================================
+   TITULO DE TARJETA
+================================ */
+.tarjeta-actividad h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+
+    font-size: 1.1rem;
+
+    color: var(--primary-dark);
+}
+
+/* ================================
+   TEXTO
+================================ */
+.tarjeta-actividad p {
+    color: var(--text-secondary);
+
+    font-size: 0.92rem;
+
+    margin-bottom: 0;
+}
+
+/* ================================
+   BOTONES
+================================ */
 .btn-enlace {
     display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-color);
+
+    margin-top: 1.3rem;
+
+    padding: 0.65rem 1.1rem;
+
+    background: var(--primary-color);
+
     color: white;
+
     text-decoration: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
+
+    border-radius: 7px;
+
+    font-size: 0.88rem;
+
+    font-weight: 600;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .btn-enlace:hover {
-    opacity: 0.9;
+    background: var(--primary-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(35, 107, 80, 0.25);
 }
+
+/* ================================
+   EFECTO AL PRESIONAR
+================================ */
+.btn-enlace:active {
+    transform: translateY(0);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 600px) {
+
+    header {
+        padding: 2rem 1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    main {
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .grid-actividades {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjeta-actividad {
+        padding: 1.3rem;
+    }
+}
+
