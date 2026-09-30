@@ -1,0 +1,82 @@
+Códigos de la unidad 2
+
+function setup() {
+  createCanvas(600, 300);
+  angleMode(DEGREES);
+}
+
+function draw() {
+  background(240);
+  
+  // ETAPA 1: Bebé sin bigotes
+  push();
+  translate(60, 150);    // Posicíon
+  scale(0.4);            // pequeñito
+  rotate(-0);            // Nivelado
+  fill(255, 182, 193);   // color rosa
+  dibujarGatoBase(1);    // 1 = etapa bebé
+  pop();
+  
+  // ETAPA 2: Cachorro  sin bigotes
+  push();
+  translate(160, 150);
+  scale(0.6);
+  rotate(-0);
+  fill(255, 218, 185); // color 
+  dibujarGatoBase(2);
+  pop();
+  
+  // ETAPA 3: Joven  CON bigotes
+  push();
+  translate(260, 150);
+  scale(0.8);
+  rotate(-0);
+  fill(255, 165, 0);  // Naranja
+  dibujarGatoBase(3);
+  dibujarBigotes();
+  pop();
+  
+  // ETAPA 4: Adulto CON bigotes
+  push();
+  translate(380, 150);
+  scale(1.0);
+  rotate(-0);
+  fill(210, 105, 30); // Marrón
+  dibujarGatoBase(4);
+  dibujarBigotes();
+  pop();
+  
+  // ETAPA 5: Mayor  CON bigotes
+  push();
+  translate(510, 150);
+  scale(1.1);
+  rotate(-0);
+  fill(139, 69, 19);
+  dibujarGatoBase(5); // Mrrón oscurro
+  dibujarBigotes();
+  pop();
+}
+
+// Dibuja todo menos bigotes
+function dibujarGatoBase(etapa) {
+  ellipse(0, 10, 40, 30);              // Cuerpo
+  ellipse(0, -10, 30, 25);             // Cabeza
+  
+  // Orejas crecientes
+  triangle(-12, -20, -20, -35, -5, -22);
+  triangle( 12, -20,  20, -35,  5, -22);
+  
+  fill(0);
+  ellipse(-6, -12, 4, 6);              // Ojos
+  ellipse( 6, -12, 4, 6);
+  
+  triangle(0, -5, -3, -2, 3, -2);      // Nariz
+}
+
+// Solo dibuja los bigotes
+function dibujarBigotes() {
+  stroke(0);
+  line(-15, -5, -5, -3);
+  line( 15, -5,  5, -3);
+  noStroke();
+}
