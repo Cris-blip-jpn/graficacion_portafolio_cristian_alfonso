@@ -80,3 +80,172 @@ function dibujarBigotes() {
   line( 15, -5,  5, -3);
   noStroke();
 }
+
+
+Código de la Actividad 2.2
+
+// VARIABLES
+let velocidadGiro = 1.1;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight); // Lienzo que se adapta
+  angleMode(DEGREES); // Trabajamos en grados
+}
+
+function draw() {
+  // Color de fondo
+  background(255, 230, 153);
+  
+  // Centro de la pantalla
+  let centroX = width / 2;
+  let centroY = height / 2;
+  
+  // RUEDA DE LA FORTUNA
+  push();
+  // Interacción: sigue al ratón suavemente
+  let suaveX = centroX + (mouseX - centroX) * 0.3;
+  let suaveY = centroY - 50 + (mouseY - (centroY - 50)) * 0.1;
+  translate(suaveX, suaveY);
+  
+  rotate(frameCount * velocidadGiro); // Gira solita con el tiempo
+  
+  // Aro exterior de la rueda
+  noFill();
+  stroke(255, 100, 100); // Rojito
+  strokeWeight(5);
+  ellipse(0, 0, 300, 300);
+  
+  // Centro de la rueda
+  fill(255, 200, 0); // Amarillo
+  noStroke();
+  ellipse(0, 0, 30, 30);
+  
+  // Rayos que salen del centro — 8 en total
+  stroke(150);
+  strokeWeight(2);
+  line(0, 0, 150, 0);
+  push(); rotate(45);  line(0, 0, 150, 0); pop();
+  push(); rotate(90);  line(0, 0, 150, 0); pop();
+  push(); rotate(135); line(0, 0, 150, 0); pop();
+  push(); rotate(180); line(0, 0, 150, 0); pop();
+  push(); rotate(225); line(0, 0, 150, 0); pop();
+  push(); rotate(270); line(0, 0, 150, 0); pop();
+  push(); rotate(315); line(0, 0, 150, 0); pop();
+  
+  // CANASTILLAS 
+  
+  // Canastilla 1
+  push();
+  rotate(0);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro); // En este caso puedo deshacer el gito
+  fill(255, 200, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 2
+  push();
+  rotate(45);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 180, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 3
+  push();
+  rotate(90);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 200, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 4
+  push();
+  rotate(135);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 180, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 5
+  push();
+  rotate(180);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 200, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 6
+  push();
+  rotate(225);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 180, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 7
+  push();
+  rotate(270);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 200, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  // Canastilla 8
+  push();
+  rotate(315);
+  translate(150, 0);
+  rotate(-frameCount * velocidadGiro);
+  fill(255, 180, 0);
+  noStroke();
+  rect(-20, -10, 40, 25);
+  pop();
+  
+  pop(); // Cerramos la rueda
+  
+  // MONTAÑAS con scale()
+  
+  push();
+  translate(width/2, height - 20);
+  
+  // Montaña lejana y más pequeña
+  push();
+  scale(0.6);
+  fill(70, 110, 80);
+  triangle(-350, -150, -200, 0, -500, 0);
+  pop();
+  
+  // Montaña intermedia
+  push();
+  scale(0.8);
+  fill(60, 130, 90);
+  triangle(50, -200, -150, 0, 250, 0);
+  pop();
+  
+  // Montaña cercana en  tamaño real
+  push();
+  scale(1.0);
+  fill(50, 150, 100);
+  triangle(250, -120, 100, 0, 400, 0);
+  pop();
+  
+  pop();
+}
+
+// Tamaño de ventana 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
