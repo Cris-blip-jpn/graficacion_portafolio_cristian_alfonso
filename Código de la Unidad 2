@@ -84,168 +84,226 @@ function dibujarBigotes() {
 
 Código de la Actividad 2.2
 
-// VARIABLES
-let velocidadGiro = 1.1;
+let velocidadGiro = 0.6;
+let fondo;
 
-function setup() {
-  createCanvas(windowWidth, windowHeight); // Lienzo que se adapta
-  angleMode(DEGREES); // Trabajamos en grados
+async function setup() {
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+  
+  // Cargar imagen de fondo
+  fondo = await loadImage("Parque de diversión.jpg"); 
 }
 
 function draw() {
-  // Color de fondo
-  background(255, 230, 153);
   
-  // Centro de la pantalla
+  // FONDO BIEN AJUSTADO 
+  if (fondo) {
+    let escala = max(width / fondo.width, height / fondo.height);
+    let ancho = fondo.width * escala;
+    let alto = fondo.height * escala;
+    image(fondo, (width - ancho) / 2, (height - alto) / 2, ancho, alto);
+  }
+  
+  // Capa suave 
+  fill(255, 230, 153, 30);
+  rect(0, 0, width, height);
+  
   let centroX = width / 2;
   let centroY = height / 2;
   
-  // RUEDA DE LA FORTUNA
+  
+  // SOL BRILLANTE 
+ 
   push();
-  // Interacción: sigue al ratón suavemente
-  let suaveX = centroX + (mouseX - centroX) * 0.3;
-  let suaveY = centroY - 50 + (mouseY - (centroY - 50)) * 0.1;
+  translate(width - 120, 100);
+  rotate(frameCount * 0.2);
+  stroke(255, 200, 0, 150);
+  strokeWeight(3);
+  push(); rotate(0);   line(0, -60, 0, -90); pop();
+  push(); rotate(45);  line(0, -60, 0, -90); pop();
+  push(); rotate(90);  line(0, -60, 0, -90); pop();
+  push(); rotate(135); line(0, -60, 0, -90); pop();
+  push(); rotate(180); line(0, -60, 0, -90); pop();
+  push(); rotate(225); line(0, -60, 0, -90); pop();
+  push(); rotate(270); line(0, -60, 0, -90); pop();
+  push(); rotate(315); line(0, -60, 0, -90); pop();
+  fill(255, 220, 0);
+  noStroke();
+  ellipse(0, 0, 100, 100);
+  pop();
+  
+ 
+  // NUBES QUE FLOTAN 
+
+  function dibujarNube(x, y, tam) {
+    push();
+    translate(x, y);
+    scale(tam);
+    fill(255, 255, 255, 220);
+    noStroke();
+    ellipse(0, 0, 80, 50);
+    ellipse(40, 0, 60, 45);
+    ellipse(-40, 0, 50, 40);
+    ellipse(20, -20, 55, 40);
+    ellipse(-20, -15, 50, 35);
+    pop();
+  }
+  
+  let nube1x = 100 + sin(frameCount * 0.3) * 30;
+  let nube2x = width/2 + cos(frameCount * 0.25) * 25;
+  let nube3x = width - 150 + sin(frameCount * 0.2) * 35;
+  
+  dibujarNube(nube1x, 80, 0.7);
+  dibujarNube(nube2x, 60, 0.9);
+  dibujarNube(nube3x, 90, 0.6);
+  
+ 
+  // RUEDA DE LA FORTUNA 
+
+  push();
+  let suaveX = centroX + (mouseX - centroX) * 0.15;
+  let suaveY = centroY - 30 + (mouseY - (centroY - 30)) * 0.15;
   translate(suaveX, suaveY);
   
-  rotate(frameCount * velocidadGiro); // Gira solita con el tiempo
-  
-  // Aro exterior de la rueda
+  // Sombra
+  push();
+  translate(8, 8);
+  rotate(frameCount * velocidadGiro);
   noFill();
-  stroke(255, 100, 100); // Rojito
-  strokeWeight(5);
+  stroke(0, 0, 0, 40);
+  strokeWeight(6);
+  ellipse(0, 0, 310, 310);
+  pop();
+  
+  rotate(frameCount * velocidadGiro);
+  
+  // Aros decorativos
+  noFill();
+  stroke(255, 80, 80);
+  strokeWeight(8);
   ellipse(0, 0, 300, 300);
   
-  // Centro de la rueda
-  fill(255, 200, 0); // Amarillo
+  stroke(255, 180, 0);
+  strokeWeight(3);
+  ellipse(0, 0, 270, 270);
+  
+  // Centro brillante
+  fill(255, 215, 0);
   noStroke();
-  ellipse(0, 0, 30, 30);
+  ellipse(0, 0, 35, 35);
+  fill(255, 255, 200);
+  ellipse(-5, -5, 10, 10);
   
-  // Rayos que salen del centro — 8 en total
-  stroke(150);
-  strokeWeight(2);
-  line(0, 0, 150, 0);
-  push(); rotate(45);  line(0, 0, 150, 0); pop();
-  push(); rotate(90);  line(0, 0, 150, 0); pop();
-  push(); rotate(135); line(0, 0, 150, 0); pop();
-  push(); rotate(180); line(0, 0, 150, 0); pop();
-  push(); rotate(225); line(0, 0, 150, 0); pop();
-  push(); rotate(270); line(0, 0, 150, 0); pop();
-  push(); rotate(315); line(0, 0, 150, 0); pop();
+  // Rayos con colores alternos
+  stroke(200, 80, 80, 180);
+  push(); rotate(0);   line(0, 0, 135, 0); pop();
+  stroke(80, 80, 200, 180);
+  push(); rotate(45);  line(0, 0, 135, 0); pop();
+  stroke(200, 80, 80, 180);
+  push(); rotate(90);  line(0, 0, 135, 0); pop();
+  stroke(80, 80, 200, 180);
+  push(); rotate(135); line(0, 0, 135, 0); pop();
+  stroke(200, 80, 80, 180);
+  push(); rotate(180); line(0, 0, 135, 0); pop();
+  stroke(80, 80, 200, 180);
+  push(); rotate(225); line(0, 0, 135, 0); pop();
+  stroke(200, 80, 80, 180);
+  push(); rotate(270); line(0, 0, 135, 0); pop();
+  stroke(80, 80, 200, 180);
+  push(); rotate(315); line(0, 0, 135, 0); pop();
   
-  // CANASTILLAS 
+  // Canastillas con asiento
+  push(); rotate(0);   translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 200, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(45);  translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 160, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(90);  translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 200, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(135); translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 160, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(180); translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 200, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(225); translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 160, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(270); translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 200, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
+  push(); rotate(315); translate(150, 0); rotate(-frameCount * velocidadGiro); fill(255, 160, 0); noStroke(); rect(-22, -8, 44, 22, 5); fill(200, 120, 0); rect(-18, 2, 36, 8, 2); pop();
   
-  // Canastilla 1
+  pop(); // Cierra rueda
+  
+  // MONTAÑAS 
+
   push();
-  rotate(0);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro); // En este caso puedo deshacer el gito
-  fill(255, 200, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
+  translate(width / 2, height - 30);
+  
+  // Capa 1 — Más lejanas / azuladas
+  push();
+  scale(0.5);
+  fill(72, 99, 127, 220);
+  triangle(-500, -200, -250, 0, -700, 0);
   pop();
   
-  // Canastilla 2
-  push();
-  rotate(45);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 180, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  // Canastilla 3
-  push();
-  rotate(90);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 200, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  // Canastilla 4
-  push();
-  rotate(135);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 180, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  // Canastilla 5
-  push();
-  rotate(180);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 200, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  // Canastilla 6
-  push();
-  rotate(225);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 180, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  // Canastilla 7
-  push();
-  rotate(270);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 200, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  // Canastilla 8
-  push();
-  rotate(315);
-  translate(150, 0);
-  rotate(-frameCount * velocidadGiro);
-  fill(255, 180, 0);
-  noStroke();
-  rect(-20, -10, 40, 25);
-  pop();
-  
-  pop(); // Cerramos la rueda
-  
-  // MONTAÑAS con scale()
-  
-  push();
-  translate(width/2, height - 20);
-  
-  // Montaña lejana y más pequeña
   push();
   scale(0.6);
-  fill(70, 110, 80);
-  triangle(-350, -150, -200, 0, -500, 0);
+  fill(80, 110, 145, 210);
+  triangle(150, -240, -180, 0, 400, 0);
   pop();
   
-  // Montaña intermedia
+  // Capa 2 — Intermedias / verde-azuladas
   push();
-  scale(0.8);
-  fill(60, 130, 90);
-  triangle(50, -200, -150, 0, 250, 0);
+  scale(0.75);
+  fill(45, 100, 85, 230);
+  triangle(-300, -180, -80, 0, -500, 0);
   pop();
   
-  // Montaña cercana en  tamaño real
+  push();
+  scale(0.85);
+  fill(55, 120, 95, 225);
+  triangle(200, -160, 30, 0, 450, 0);
+  pop();
+  
+  // Capa 3 — Cercanas / verdes vivas
   push();
   scale(1.0);
-  fill(50, 150, 100);
-  triangle(250, -120, 100, 0, 400, 0);
+  fill(34, 139, 74, 240);
+  triangle(-200, -150, -40, 0, -380, 0);
   pop();
   
+  push();
+  scale(1.0);
+  fill(28, 150, 68, 240);
+  triangle(180, -130, 20, 0, 350, 0);
+  pop();
+  
+  // Cimas nevadas 
+  push();
+  scale(1.0);
+  fill(255, 255, 255, 230);
+  triangle(-110, -150, -90, -120, -70, -150);
+  pop();
+  
+  push();
+  scale(1.0);
+  fill(255, 255, 255, 230);
+  triangle(100, -130, 80, -100, 60, -130);
+  pop();
+  
+  // Césped con colinitas 
+  fill(50, 160, 60, 230);
+  rect(-width / 2, -10, width, 40);
+  
+  fill(60, 175, 70, 200);
+  ellipse(-300, 0, 200, 40);
+  ellipse(280, 0, 220, 45);
+  
+  pop();
+  
+  
+  // FLECHA INDICADORA 
+  
+  push();
+  translate(centroX, centroY - 180);
+  fill(255, 50, 50);
+  noStroke();
+  triangle(0, 0, -15, -30, 15, -30);
+  rect(-8, -30, 16, 20);
   pop();
 }
 
-// Tamaño de ventana 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
