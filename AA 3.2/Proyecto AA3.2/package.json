@@ -1,0 +1,22 @@
+{
+  "name": "proyecto-aa-3-2-escena-3d",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "vite": "^5.3.6"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}
